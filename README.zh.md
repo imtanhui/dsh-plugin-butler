@@ -1,4 +1,4 @@
-# dsh-plugin-manager
+# dsh-plugin-butler
 
 中文 | [English](README.md)
 
@@ -17,7 +17,7 @@
 ## 安装
 
 ```bash
-dsh plugin --profile web add dsh-plugin-manager
+dsh plugin --profile web add dsh-plugin-butler
 ```
 
 重启 web profile 后，打开 **设置 → 插件 → 插件管理**。

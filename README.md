@@ -1,4 +1,4 @@
-# dsh-plugin-manager
+# dsh-plugin-butler
 
 [中文](README.zh.md) | English
 
@@ -17,7 +17,7 @@ Manage DeepSeek Harness plugins from the Web settings page. **Zero build, zero r
 ## Install
 
 ```bash
-dsh plugin --profile web add dsh-plugin-manager
+dsh plugin --profile web add dsh-plugin-butler
 ```
 
 Restart the web profile, then open **Settings → Plugins → Plugin manager**.

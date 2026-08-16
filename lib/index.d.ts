@@ -1,4 +1,4 @@
-export declare const name: 'dsh-plugin-manager'
+export declare const name: 'dsh-plugin-butler'
 export declare const inject: string[]
 export declare const CATEGORY_LABELS: Record<string, string>
 export declare const CATALOG: Record<string, readonly [string, string, string]>
