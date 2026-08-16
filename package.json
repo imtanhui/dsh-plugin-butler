@@ -1,7 +1,7 @@
 {
   "name": "dsh-plugin-manager",
   "description": "插件管家——图形化插件管理：中文名与用途说明目录 + 一键启停（写入 profile cordis.patch.yml，实时热生效）+ 自定义分组 + 更新检测。零构建、零运行时依赖。",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "type": "module",
   "main": "lib/index.js",
   "license": "MIT",

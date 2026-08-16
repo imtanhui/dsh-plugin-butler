@@ -9,6 +9,9 @@
 - **分类**：官方（`@deepseek-ai/*` / `cordis:*`）与外部（`dsh plugin add` 安装的），可折叠展开。
 - **自定义分组**：外部插件建组 / 重命名 / 删组 / 移动，存于 `~/.dsh/plugin-manager/groups.json`。
 - **更新检测 + 一键更新**：对比 npm registry `latest`，点「更新」重跑 `pnpm add <name>@latest`（失败自动回滚旧版）。
+- **插件市场**：搜索 npm 上的 DSH 插件（默认 `dsh-plugin` 关键词），查看详情 / README，一键安装（等价于 `dsh plugin add`，自动加入组合层）。
+- **卸载**：外部插件一键卸载（先从组合层移除再 `pnpm remove`，失败自动回滚组合层）。
+- **健康状态**：加载失败的插件红色高亮 + 显示报错原因 + 「只看失败」过滤。
 - **GitHub 直达**：外部插件按住 **Ctrl + 左键**打开其 GitHub 仓库。
 
 ## 安装
@@ -23,7 +26,7 @@ dsh plugin --profile web add dsh-plugin-manager
 
 ## 工作原理
 
-- **Host 半**（`lib/index.js`）：`apply(ctx)` 注册 `webServer` 环回路由 `/plugin-manager/*`（list / setEnabled / setOverride / removeOverride / createGroup / renameGroup / deleteGroup / assign / checkUpdates / update），直接读写补丁层与状态文件。
+- **Host 半**（`lib/index.js`）：`apply(ctx)` 注册 `webServer` 环回路由 `/plugin-manager/*`（list / setEnabled / setOverride / removeOverride / createGroup / renameGroup / deleteGroup / assign / checkUpdates / update / market / detail / install / uninstall），直接读写补丁层、组合层（`dsh.profile.bundles`）与状态文件。
 - **Client 半**（`lib/client.js`）：手写的 `window.__ModuleLoader__.load` bundle（无打包器），注册 `settings.plugins.tab`「插件管理」，同源 `fetch` 调 Host。
 - 不使用 Typert / zod / 打包器，因此无需 `npm install` 和构建步骤。
 
@@ -40,8 +43,9 @@ cordis.patch.yml   bundle 补丁层（插入宿主条目）
 
 - 开关插件会实时 recompose 其子树，正在运行的会话可能短暂感知到变化。
 - 停用系统核心行（web shell 等）会使应用不可用，因此核心行不可停用。
-- 更新不是热生效，需重启 profile 才加载新代码。
-- 管理器只编辑 profile 的用户补丁层，会保留手工添加的其它补丁。
+- 更新 / 安装 / 卸载不是热生效，需重启 profile 才加载新代码。
+- 市场搜索与详情走 npm registry，需能访问 `registry.npmjs.org`（网络受限时会显示错误）。
+- 管理器只编辑 profile 的用户补丁层与组合层，会保留手工添加的其它补丁。
 - HTTP 路由做了同源校验（无鉴权）；仅在信任的 loopback 环境使用，勿绑定到公网。
 
 ## 开发
