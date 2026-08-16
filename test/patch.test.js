@@ -8,6 +8,7 @@ import {
   setRowDisabled,
   initialPatchFile,
   githubUrl,
+  githubFullName,
   moduleShortName,
 } from '../lib/patch.js'
 
@@ -107,6 +108,15 @@ test('githubUrl 规整各种 repository 形态', () => {
   assert.equal(githubUrl('github.com/foo/bar'), null)
   assert.equal(githubUrl(null), null)
   assert.equal(githubUrl(undefined), null)
+})
+
+test('githubFullName 提取 owner/repo', () => {
+  assert.equal(githubFullName('https://github.com/foo/bar'), 'foo/bar')
+  assert.equal(githubFullName('git+https://github.com/foo/bar.git'), 'foo/bar')
+  assert.equal(githubFullName({ url: 'git@github.com:foo/bar.git' }), 'foo/bar')
+  assert.equal(githubFullName('https://github.com/foo/bar/tree/main'), 'foo/bar')
+  assert.equal(githubFullName('https://gitlab.com/foo/bar'), null)
+  assert.equal(githubFullName(null), null)
 })
 
 test('moduleShortName 去掉作用域与 dsh/cordis 前缀', () => {
