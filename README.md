@@ -1,5 +1,7 @@
 # dsh-plugin-manager
 
+[中文](README.zh.md) | English
+
 Manage DeepSeek Harness plugins from the Web settings page. **Zero build, zero runtime dependencies** (Node builtins + services the deployment already provides).
 
 - **Chinese catalog** — every plugin gets a Chinese name + one-line description + category (130+ built-in module catalog). Click the description to override it; overrides live in `~/.dsh/plugin-manager/catalog.json`.

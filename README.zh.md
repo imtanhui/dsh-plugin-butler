@@ -1,5 +1,7 @@
 # dsh-plugin-manager
 
+中文 | [English](README.md)
+
 在 DeepSeek Harness 的 Web 设置页里管理插件。**零构建、零运行时依赖**（只依赖 node 内置 + 部署已提供的服务）。
 
 - **中文目录**：每个插件显示中文名 + 一句话用途说明 + 分类（内置 130+ 模块目录），点击说明可自定义，存于 `~/.dsh/plugin-manager/catalog.json`。
